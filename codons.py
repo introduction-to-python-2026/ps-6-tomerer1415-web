@@ -1,15 +1,18 @@
 def create_codon_dict(file_path):
-    path = "/content/data/codons.txt"
-    file = open(path)
-    rows = file.readlines()
-    file.close()
-    
     codon_dict = {}
+
+    with open(file_path) as file:
+        rows = file.readlines()
+
     for row in rows:
-      parts = row.strip().split('\t')
-      codon = parts[0]
-      amino_acid = parts[2]
+        parts = row.strip().split('\t')
 
-      codon_dict[codon] = amino_acid
+        if len(parts) < 3:
+            continue
 
-     return codon_dict
+        codon = parts[0]
+        amino_acid = parts[2]
+
+        codon_dict[codon] = amino_acid
+
+    return codon_dict
